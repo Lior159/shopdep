@@ -60,3 +60,25 @@
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
 }
+
+.side-bar {
+  height: 100%;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  padding-top: 60px;
+}
+
+.side-bar a {
+  text-align: left;
+  margin: 25px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.side-bar a:hover {
+  color: rgb(118, 118, 118);
+}
