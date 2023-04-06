@@ -1,28 +1,36 @@
-.nav-bar {
+.main-navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  align-items: center;
+  padding: 20px 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  position: sticky;
+  top: 0;
+}
+
+.main-navbar--item-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
-  padding: 10px;
 }
 
-.item-list {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.item {
+.main-navbar--item-list .item {
   list-style: none;
   margin: 0 20px;
 }
 
-.item a {
+.main-navbar--item-list .item a {
   text-decoration: none;
   color: rgb(118, 118, 118);
 }
 
-.search-box {
+.main-navbar--item-list .item a:hover {
+  color: black;
+}
+
+.main-navbar--item-list .search-box {
   display: flex;
   align-items: center;
   border: solid 1px black;
@@ -30,8 +38,8 @@
   height: 40px;
 }
 
-.search-box input,
-.search-box input:focus {
+.main-navbar--item-list .search-box input,
+.main-navbar--item-list .search-box input:focus {
   font-size: 18px;
   display: flex;
   width: 90%;
@@ -39,8 +47,13 @@
   outline: none;
 }
 
-.btn a {
+.main-navbar--item-list .btn a {
   background-color: black;
   color: white;
   padding: 10px 15px;
+}
+
+.main-navbar--item-list .btn a:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
 }

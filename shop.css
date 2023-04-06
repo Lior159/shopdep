@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "League Spartan", sans-serif;
+}
+
+.main-section {
+  padding: 80px 40px;
+}
+
+.product {
+  width: 23%;
+  padding: 10px;
+  border: 1px solid #cce7d0;
+  border-radius: 25px;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+h5 {
+  font-size: 14px;
+  color: #1a1a1a;
+}
