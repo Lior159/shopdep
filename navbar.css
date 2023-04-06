@@ -24,9 +24,11 @@
 .main-navbar--item-list .item a {
   text-decoration: none;
   color: rgb(118, 118, 118);
+  transition: color 0.3s;
 }
 
-.main-navbar--item-list .item a:hover {
+.main-navbar--item-list .item a:hover,
+.main-navbar--item-list .active a {
   color: black;
 }
 
@@ -49,8 +51,9 @@
 
 .main-navbar--item-list .btn a {
   background-color: black;
-  color: white;
   padding: 10px 15px;
+  color: white;
+  transition: background-color 0.3s;
 }
 
 .main-navbar--item-list .btn a:hover {
