@@ -1,6 +1,16 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
+exports.isAuthenticated = (req, res, next) => {
+  if (!req.isLoggedIn) {
+    req.flash("error", "you must sign in");
+    return rq.session.save(() => {
+      res.redirect("/sign-in");
+    });
+  }
+  next();
+};
+
 exports.getSignInPage = (req, res) => {
   res.render("auth/sign-in", {
     pageTitle: "Sign In",

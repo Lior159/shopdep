@@ -23,6 +23,7 @@
                 <input type="text" autocomplete="off" name="lname" placeholder="Last name">
                 <input type="text" autocomplete="off" name="email" placeholder="Email adress">
                 <input type="text" autocomplete="off" name="password" placeholder="Password">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button class="btn">Sign up</button>
                 <% if (errorMessage) { %>
                 <p><%= errorMessage %></p>
