@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const flash = require("connect-flash");
 
 const shopRouter = require("./routes/shop");
 const authRouter = require("./routes/auth");
@@ -33,6 +34,8 @@ app.use(
     // }
   })
 );
+
+app.use(flash());
 
 //settin up ejs
 app.set("view engine", "ejs");

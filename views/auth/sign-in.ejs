@@ -18,11 +18,15 @@
     <%- include('../includes/navbar.ejs')  %>
     <section class="main-section">
         <div class="form-container">
-            <form action="/sign-up" method="post">
+            <form action="/sign-in" method="post">
                 <input type="text" name="email" placeholder="Email adress">
                 <input type="password" name="password" placeholder="Password">
                 <a href="/reset-password">Forgot your password?</a>
                 <button class="btn">Sign in</button>
+                <% if (errorMessage) { %>
+                <p><%= errorMessage %></p>
+                <br>
+                <% } %>
             </form>
             <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
         </div>

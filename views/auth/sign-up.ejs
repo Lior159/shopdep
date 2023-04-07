@@ -24,6 +24,10 @@
                 <input type="text" autocomplete="off" name="email" placeholder="Email adress">
                 <input type="text" autocomplete="off" name="password" placeholder="Password">
                 <button class="btn">Sign up</button>
+                <% if (errorMessage) { %>
+                <p><%= errorMessage %></p>
+                <br>
+                <% } %>
             </form>
         </div>
     </section>
