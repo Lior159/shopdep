@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
 const shopRouter = require("./routes/shop");
 const authRouter = require("./routes/auth");
 
+const MONGODB_URI =
+  "mongodb+srv://lior:lior159@cluster1.wgsdzck.mongodb.net/shop?retryWrites=true&w=majority";
 const app = express();
 
 //settin up ejs
@@ -18,7 +20,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //setting up public folder
 app.use(express.static(path.join(__dirname, "public")));
 
+//setting up routers
 app.use(shopRouter);
 app.use(authRouter);
 
-app.listen(3000);
+mongoose
+  .connect(MONGODB_URI)
+  .then((result) => {
+    app.listen(3000);
+    console.log("connected");
+  })
+  .catch((err) => console.log(err));
