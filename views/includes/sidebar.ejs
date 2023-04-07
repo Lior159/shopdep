@@ -3,7 +3,7 @@
     <a href="#">Orders</a>
     <a href="#">Transaction history</a>
     <a href="#">Messeges</a>
-    <% if (admin) { %>
-    <a href="/add-product">Add product</a>
+    <% if (isAdmin) { %>
+    <a class="<%= path === '/account/add-product'? 'active': '' %>" href="/account/add-product">Add product</a>
     <% } %>
 </div>

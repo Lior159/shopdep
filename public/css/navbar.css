@@ -27,9 +27,25 @@
   transition: color 0.3s;
 }
 
+.main-navbar--item-list.left .item a::after {
+  content: "";
+  height: 2px;
+  width: 0;
+  background-color: black;
+  display: block;
+  margin: auto;
+  transition: width 0.5s;
+}
+
 .main-navbar--item-list .item a:hover,
 .main-navbar--item-list .active a {
   color: black;
+  font-weight: bold;
+}
+
+.main-navbar--item-list.left .item.active a::after,
+.main-navbar--item-list.left .item a:hover::after {
+  width: 100%;
 }
 
 .main-navbar--item-list .search-box {
@@ -105,6 +121,7 @@
   transition: 0.3s;
 }
 
-.side-bar a:hover {
+.side-bar a:hover,
+.side-bar .active {
   color: rgb(118, 118, 118);
 }

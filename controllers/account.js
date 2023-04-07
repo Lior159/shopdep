@@ -1,7 +1,13 @@
 exports.getAccountPage = (req, res) => {
-  res.render("shop/account", {
+  res.render("account/account", {
     pageTitle: "Account",
     path: "/account",
-    admin: req.session.user.isAdmin,
+  });
+};
+
+exports.getAddProductPage = (req, res) => {
+  res.render("account/add-product", {
+    pageTitle: "Add Product",
+    path: "/account/add-product",
   });
 };

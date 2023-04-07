@@ -9,6 +9,7 @@ const csurf = require("csurf");
 
 const shopRouter = require("./routes/shop");
 const authRouter = require("./routes/auth");
+const accountRouter = require("./routes/account.js");
 const User = require("./models/user");
 
 const MONGODB_URI =
@@ -23,7 +24,7 @@ const store = new MongoDBStore({
 const app = express();
 
 //setting up body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //settin up ejs
 app.set("view engine", "ejs");
@@ -54,6 +55,7 @@ app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
   if (req.session.isLoggedIn) {
     req.session.user = new User().init(req.session.user);
+    res.locals.isAdmin = req.session.user.isAdmin;
   }
   next();
 });
@@ -61,6 +63,7 @@ app.use((req, res, next) => {
 //setting up routers
 app.use(shopRouter);
 app.use(authRouter);
+app.use("/account", accountRouter);
 
 mongoose
   .connect(MONGODB_URI)
