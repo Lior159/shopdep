@@ -8,6 +8,7 @@
   font-family: Arial, Helvetica, sans-serif;
   position: sticky;
   top: 0;
+  z-index: 3;
 }
 
 .main-navbar--item-list {

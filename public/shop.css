@@ -9,6 +9,7 @@ body {
 }
 
 .product {
+  position: relative;
   width: 23%;
   padding: 10px;
   border: 1px solid #cce7d0;
@@ -20,7 +21,19 @@ body {
   border-radius: 20px;
 }
 
-h5 {
+.product h5,
+.product h4 {
   font-size: 14px;
   color: #1a1a1a;
+  margin: 8px 0;
+}
+
+.product h4 {
+  font-size: 18px;
+}
+
+.product i {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
 }
