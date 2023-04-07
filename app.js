@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const shopRouter = require("./routes/shop");
+const authRouter = require("./routes/auth");
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(shopRouter);
+app.use(authRouter);
 
 app.listen(3000);
