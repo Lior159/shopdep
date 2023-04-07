@@ -10,11 +10,26 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="account.css">
     <title>Home</title>
 </head>
 
 <body>
     <%- include('../includes/navbar.ejs') %>
+    <section class="main-section">
+        <%- include('../includes/sidebar.ejs') %>
+        <div class="main-container">
+            <div class="form-container">
+                <form action="/sign-up" method="post">
+                    <input type="text" name="title" placeholder="Title">
+                    <input type="text" name="price" placeholder="Price">
+                    <input type="text" name="imgUrl" placeholder="Image URL">
+                    <input type="text" name="description" placeholder="Description">
+                    <button class="btn">Create Product</button>
+                </form>
+            </div>
+        </div>
+    </section>
     <script src="nav-script.js"></script>
 </body>
 

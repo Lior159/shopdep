@@ -15,6 +15,21 @@
             </div>
         </li>
         <li class="item"> <a href=""><i class="fa-solid fa-cart-shopping"></i></a> </li>
-        <li class="item btn"> <a href="/sign-in">Sign in</a> </li>
+        <% if (isAuthenticated) { %>
+
+        <li class="item account">
+            <a class="account--btn btn" href="">Account
+                <i class="fa-solid fa-chevron-down account-arrow"> </i>
+                <i class="fa-solid fa-chevron-up account-arrow hidden"></i> </a>
+            <div class="account--menu hidden">
+                <ul>
+                    <li><a href="/account">Settings</a></li>
+                    <li><a href="/logout">Log Out</a></li>
+                </ul>
+            </div>
+        </li>
+        <% } else { %>
+        <li class="item account"> <a class="btn" href="/sign-in">Sign in</a> </li>
+        <% } %>
     </ul>
 </nav>

@@ -2,9 +2,19 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 exports.isAuthenticated = (req, res, next) => {
-  if (!req.isLoggedIn) {
+  if (!req.session.isLoggedIn) {
     req.flash("error", "you must sign in");
-    return rq.session.save(() => {
+    return req.session.save(() => {
+      res.redirect("/sign-in");
+    });
+  }
+  next();
+};
+
+exports.isAdmin = (req, res) => {
+  if (!req.session.user.isAdmin) {
+    req.flash("error", "you must be admin");
+    return req.session.save(() => {
       res.redirect("/sign-in");
     });
   }
@@ -73,6 +83,7 @@ exports.postSignUpPage = (req, res) => {
         lastName,
         email,
         password: hashedPassword,
+        isAdmin: false,
       });
       return user.save();
     })
@@ -86,4 +97,10 @@ exports.postSignUpPage = (req, res) => {
         res.redirect("/sign-up");
       });
     });
+};
+
+exports.getLogOut = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
 };

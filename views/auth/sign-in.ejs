@@ -25,13 +25,14 @@
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button class="btn">Sign in</button>
                 <% if (errorMessage) { %>
-                <p><%= errorMessage %></p>
+                <p class="error-msg"><%= errorMessage %></p>
                 <br>
                 <% } %>
             </form>
             <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
         </div>
     </section>
+    <script src="nav-script.js"></script>
 </body>
 
 </html>
