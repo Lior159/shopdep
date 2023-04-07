@@ -6,14 +6,18 @@ body {
 
 .main-section {
   padding: 80px 40px;
+  text-align: center;
 }
 
 .product {
-  position: relative;
   width: 23%;
-  padding: 10px;
+  min-width: 250px;
+  padding: 10px 12px;
   border: 1px solid #cce7d0;
   border-radius: 25px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03);
+  margin: 15px 0;
+  position: relative;
 }
 
 .product img {
@@ -21,18 +25,32 @@ body {
   border-radius: 20px;
 }
 
-.product h5,
-.product h4 {
-  font-size: 14px;
-  color: #1a1a1a;
-  margin: 8px 0;
+.product-desription {
+  text-align: start;
+  padding: 10px 0;
 }
 
-.product h4 {
-  font-size: 18px;
+.product-desription h5 {
+  padding-top: 7px;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+.product-desription h4 {
+  padding-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #088178;
 }
 
 .product i {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  line-height: 40px;
+  background-color: #e8f6ea;
+  color: #088178;
+  border: 1px solid #cce7d0;
   position: absolute;
   right: 10px;
   bottom: 20px;
