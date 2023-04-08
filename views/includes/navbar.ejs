@@ -1,11 +1,11 @@
-<nav class="main-navbar">
-    <ul class="main-navbar--item-list left">
+<nav class="navbar">
+    <ul class="item-list left">
         <li class="item"><img src="/img/ohara-logo2.png" alt=""></li>
         <li class="item  <%= path === '/' ? 'active': '' %>"><a href="/">Home</a></li>
         <li class="item <%= path === '/shop' ? 'active': '' %>"><a href="/shop">Shop</a></li>
         <li class="item "><a href="/">Contact</a></li>
     </ul>
-    <ul class="main-navbar--item-list right">
+    <ul class="item-list right">
         <li class="item">
             <div class="search-box">
                 <form action="/search" method="post">
@@ -16,12 +16,11 @@
         </li>
         <li class="item"> <a href=""><i class="fa-solid fa-cart-shopping"></i></a> </li>
         <% if (isAuthenticated) { %>
-
         <li class="item account">
-            <a class="account--btn btn" href="">Account
+            <a class="account-btn btn" href="">Account
                 <i class="fa-solid fa-chevron-down account-arrow"> </i>
                 <i class="fa-solid fa-chevron-up account-arrow hidden"></i> </a>
-            <div class="account--menu hidden">
+            <div class="account-menu hidden">
                 <ul>
                     <li><a href="/account">Settings</a></li>
                     <li><a href="/logout">Log Out</a></li>

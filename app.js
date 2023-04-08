@@ -70,6 +70,7 @@ app.use("/account", accountRouter);
 app.use((req, res) => {
   res.render("404", {
     path: "/404",
+    pageTitle: "Page not found",
   });
 });
 

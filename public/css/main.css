@@ -3,4 +3,188 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  list-style-type: none;
+}
+
+/*---------- navbar ----------*/
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 20px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.navbar .item-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .item {
+  margin: 0 20px;
+}
+
+.navbar .item a {
+  text-decoration: none;
+  color: rgb(130, 130, 130);
+  transition: color 0.3s;
+}
+
+.navbar .left .item a::after {
+  content: "";
+  height: 2px;
+  width: 0;
+  background-color: black;
+  display: block;
+  margin: auto;
+  transition: width 0.5s;
+}
+
+.navbar .item a:hover,
+.navbar .item.active a {
+  color: black;
+}
+
+.navbar .left .item.active a::after,
+.navbar .left .item a:hover::after {
+  width: 100%;
+}
+
+.navbar .search-box {
+  display: flex;
+  align-items: center;
+  border: solid 1px black;
+  padding: 10px;
+  height: 40px;
+}
+
+.navbar .search-box input,
+.navbar .search-box input:focus {
+  font-size: 18px;
+  display: flex;
+  width: 90%;
+  border: none;
+  outline: none;
+}
+
+.navbar .account {
+  position: relative;
+  display: inline-block;
+}
+
+.navbar .account .btn {
+  background-color: black;
+  padding: 10px 15px;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.navbar .account .btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+}
+
+.navbar .account .account-menu {
+  display: block;
+  position: absolute;
+  top: 200%;
+  right: 0;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  width: 100%;
+  padding: 12px 16px;
+  text-align: start;
+  transition: display 1s;
+}
+
+.navbar .account .hidden {
+  display: none;
+}
+
+.navbar .account .account-menu li {
+  margin: 20px 0;
+}
+
+/*---------- account-sidebar ----------*/
+
+.account-sidebar {
+  height: 100%;
+  position: fixed;
+  top: 10%;
+  left: 0;
+  padding-top: 60px;
+}
+
+.account-sidebar a {
+  text-align: left;
+  margin: 25px 20px;
+  font-size: 16px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.account-sidebar a:hover,
+.account-sidebar .active {
+  color: rgb(118, 118, 118);
+}
+
+/*---------- shop ----------*/
+
+.shop-section {
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.shop-section .products-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.shop-section .product {
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border: 1px solid #cce7d0;
+  border-radius: 25px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03);
+  margin: 15px 0;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.shop-section .product img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.shop-section .product-desription {
+  text-align: start;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.shop-section .product-desription h5 {
+  padding-top: 7px;
+  color: #1a1a1a;
+  font-size: 14px;
+}
+
+.shop-section .product-desription h4 {
+  padding-top: 7px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #088178;
 }

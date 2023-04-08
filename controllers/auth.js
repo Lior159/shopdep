@@ -24,6 +24,7 @@ exports.isAdmin = (req, res, next) => {
 exports.getSignInPage = (req, res) => {
   res.render("auth/sign-in", {
     path: "/sign-in",
+    pageTitle: "Sign in",
     errorMessage: req.flash("error")[0],
   });
 };
@@ -62,6 +63,7 @@ exports.postSignInPage = (req, res) => {
 exports.getSignUpPage = (req, res) => {
   res.render("auth/sign-up", {
     path: "/sign-up",
+    pageTitle: "Sign up",
     errorMessage: req.flash("error")[0],
   });
 };

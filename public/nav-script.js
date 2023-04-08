@@ -1,11 +1,13 @@
-const menuBtn = document.querySelector(".account--btn");
-const accountMenu = document.querySelector(".account--menu");
-const accountArrows = document.querySelectorAll(".account-arrow");
+const navbar_account_btn = document.querySelector(".navbar .account-btn");
+const navbar_account_menu = document.querySelector(".navbar .account-menu");
+const navbar_account_arrows = document.querySelectorAll(
+  ".navbar .account-arrow"
+);
 
-menuBtn.addEventListener("click", (e) => {
+navbar_account_btn.addEventListener("click", (e) => {
   e.preventDefault();
-  accountMenu.classList.toggle("hidden");
-  accountArrows.forEach((a) => {
+  navbar_account_menu.classList.toggle("hidden");
+  navbar_account_arrows.forEach((a) => {
     a.classList.toggle("hidden");
   });
 });
