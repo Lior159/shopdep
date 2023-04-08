@@ -16,4 +16,10 @@ router.get(
   accountController.getAddProductPage
 );
 
+router.post(
+  "/add-product",
+  authController.isAdmin,
+  accountController.postAddProductPage
+);
+
 module.exports = router;

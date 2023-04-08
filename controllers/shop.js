@@ -1,3 +1,5 @@
+const Product = require("../models/product");
+
 exports.getIndexPage = (req, res) => {
   res.render("shop/index", {
     path: "/",
@@ -5,7 +7,11 @@ exports.getIndexPage = (req, res) => {
 };
 
 exports.getShopPage = (req, res) => {
-  res.render("shop/shop", {
-    path: "/shop",
+  Product.find()
+  .then((products) => {
+    res.render("shop/shop", {
+      path: "/shop",
+      products,
+    });
   });
 };

@@ -7,14 +7,20 @@
     <%- include('../includes/navbar.ejs') %>
     <section class="main-section">
         <div class="products-container">
+            <% for (let product of products) { %>
             <div class="product">
-                <img src="./img/f1.jpg" alt="">
+                <img src="<%= product.imgUrl %>" alt="">
                 <div class="product-desription">
-                    <h5>Cartoon Astronaut T-Shirt</h5>
-                    <h4>$14</h4>
+                    <div>
+                        <h5><%= product.title %></h5>
+                        <h4>$<%= product.price %></h4>
+                    </div>
+                    <form action="/add-to-cart/<%= product._id %>" method="post">
+                        <button type="submit">Add To Cart</button>
+                    </form>
                 </div>
-                <i class="fa-solid fa-cart-shopping"></i>
             </div>
+            <% } %>
         </div>
     </section>
     <script src="/nav-script.js"></script>

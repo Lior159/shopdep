@@ -7,7 +7,8 @@
 }
 
 .form-container form input,
-.form-container form .btn {
+.form-container form .btn,
+.form-container form textarea {
   display: block;
   margin: 20px 10px;
   width: 300px;
@@ -16,6 +17,12 @@
   border-radius: 15px;
   font-size: 16px;
   padding: 0 10px;
+}
+
+.form-container form textarea {
+  padding: 10px 10px;
+  height: 100px;
+  resize: none;
 }
 
 .form-container form .btn {
