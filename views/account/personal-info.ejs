@@ -1,0 +1,69 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/account.css">
+<title>Home</title>
+</head>
+
+<body>
+    <%- include('../includes/navbar.ejs') %>
+    <section class="main-section">
+        <%- include('../includes/sidebar.ejs') %>
+        <div class="info-main-container">
+            <form class="info-block" action="">
+                <h4>First name</h4>
+                <div>
+                    <label id="info-lbl-fname" for="fname" class="info-lbl "><%= user.firstName %></label>
+                    <input id="info-input-fname" type="text" class="info-input hidden" name="fname"
+                        placeholder="<%= user.firstName %>">
+                </div>
+                <div>
+                    <button id="info-edit-fname" class="info-edit">Edit</button>
+                    <button id="info-save-fname" class="info-save hidden">Save</button>
+                    <button id="info-cancel-fname" class="info-cancel hidden">Cancel</button>
+                </div>
+            </form>
+            <form class="info-block" action="">
+                <h4>First name</h4>
+                <div>
+                    <label id="info-lbl-lname" for="lname" class="info-lbl "><%= user.lastName %></label>
+                    <input id="info-input-lname" type="text" class="info-input hidden" name="lname"
+                        placeholder="<%= user.lastName %>">
+                </div>
+                <div>
+                    <button id="info-edit-lname" class="info-edit">Edit</button>
+                    <button id="info-save-lname" class="info-save hidden">Save</button>
+                    <button id="info-cancel-lname" class="info-cancel hidden">Cancel</button>
+                </div>
+            </form>
+            <form class="info-block" action="">
+                <h4>First name</h4>
+                <div>
+                    <label id="info-lbl-password" for="password" class="info-lbl ">lior</label>
+                    <input id="info-input-password" type="text" class="info-input hidden" name="password"
+                        placeholder="lior">
+                </div>
+                <div>
+                    <button id="info-edit-password" class="info-edit">Edit</button>
+                    <button id="info-save-password" class="info-save hidden">Save</button>
+                    <button id="info-cancel-password" class="info-cancel hidden">Cancel</button>
+                </div>
+            </form>
+            <form class="info-block" action="">
+                <h4>First name</h4>
+                <div>
+                    <label id="info-lbl-email" for="email" class="info-lbl ">lior</label>
+                    <input id="info-input-email" type="text" class="info-input hidden" name="email" placeholder="lior">
+                </div>
+                <div>
+                    <button id="info-edit-email" class="info-edit">Edit</button>
+                    <button id="info-save-email" class="info-save hidden">Save</button>
+                    <button id="info-cancel-email" class="info-cancel hidden ">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script src="/nav-script.js"></script>
+    <script src="/personal-info-script.js"></script>
+    <script></script>
+</body>
+
+</html>

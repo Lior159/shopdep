@@ -2,14 +2,12 @@ const Product = require("../models/product");
 
 exports.getAccountPage = (req, res) => {
   res.render("account/account", {
-    pageTitle: "Account",
     path: "/account",
   });
 };
 
 exports.getAddProductPage = (req, res) => {
   res.render("account/add-product", {
-    pageTitle: "Add Product",
     path: "/account/add-product",
   });
 };
@@ -24,5 +22,12 @@ exports.postAddProductPage = (req, res) => {
   });
   product.save().then((result) => {
     res.redirect("/account/add-product");
+  });
+};
+
+exports.getPersonalInfoPage = (req, res) => {
+  res.render("account/personal-info", {
+    path: "/account/personal-info",
+    user: req.session.user,
   });
 };

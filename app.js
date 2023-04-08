@@ -12,6 +12,8 @@ const authRouter = require("./routes/auth");
 const accountRouter = require("./routes/account.js");
 const User = require("./models/user");
 
+const app = express();
+
 const MONGODB_URI =
   "mongodb+srv://lior:lior159@cluster1.wgsdzck.mongodb.net/shop?retryWrites=true&w=majority";
 
@@ -20,8 +22,6 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: "sessions",
 });
-
-const app = express();
 
 //setting up body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,6 +33,7 @@ app.set("views", "views");
 //setting up public folder
 app.use(express.static(path.join(__dirname, "public")));
 
+//setting up session
 app.use(
   session({
     secret: "liorzalta24@gmail.com",
@@ -45,8 +46,10 @@ app.use(
   })
 );
 
+//setting up csrf protaction
 app.use(csurf());
 
+//setting up flash sessions
 app.use(flash());
 
 //setting up local variables
@@ -64,6 +67,11 @@ app.use((req, res, next) => {
 app.use(shopRouter);
 app.use(authRouter);
 app.use("/account", accountRouter);
+app.use((req, res) => {
+  res.render("404", {
+    path: "/404",
+  });
+});
 
 mongoose
   .connect(MONGODB_URI)

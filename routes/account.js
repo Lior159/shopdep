@@ -22,4 +22,10 @@ router.post(
   accountController.postAddProductPage
 );
 
+router.get(
+  "/perosnal-info",
+  authController.isAuthenticated,
+  accountController.getPersonalInfoPage
+);
+
 module.exports = router;

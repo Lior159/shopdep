@@ -32,3 +32,32 @@
   transition: background-color 0.3s;
   cursor: pointer;
 }
+
+.hidden {
+  display: none;
+}
+
+.info-main-container {
+  width: 70%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-block {
+  display: flex;
+  width: 200px;
+  height: 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  text-align: left;
+}
+
+.info-block .info-lbl {
+  background-color: aqua;
+  width: 40px;
+  text-align: start;
+}
