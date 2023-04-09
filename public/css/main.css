@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Poppins", sans-serif;
   list-style-type: none;
 }
 
@@ -177,49 +179,53 @@
 /*---------- shop ----------*/
 
 .shop-section {
-  padding: 80px 40px;
-  text-align: center;
+  padding: 80px 0;
+  display: flex;
+}
+
+.shop-section .left-menu {
+  background-color: rgb(209, 183, 233);
+  width: 20rem;
 }
 
 .shop-section .products-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  background-color: aquamarine;
+  width: calc(100% - 20rem);
+  display: grid;
+  grid-template-columns: repeat(3, 33.333%);
 }
 
 .shop-section .product {
-  width: 23%;
-  min-width: 250px;
-  padding: 10px 12px;
-  border: 1px solid rgba(255, 69, 0, 0.2);
-  border-radius: 25px;
-  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03);
-  margin: 15px 0;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  transition: all 0.3s;
+  /* min-width: 250px; */
+  /* padding: 10px 12px; */
+  border: 1px solid black;
+  /* border-radius: 25px; */
+  /* box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.03); */
+  /* margin: 15px 0; */
+  /* position: relative;
+  display: flex; */
+  /* justify-content: space-between; */
+  /* flex-direction: column; */
+  /* transition: all 0.3s; */
 }
 
-.shop-section .product:hover {
+/* .shop-section .product:hover {
   box-shadow: 10px 10px 20px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-10px);
-}
+} */
 
 .shop-section .product img {
   width: 100%;
-  border-radius: 20px;
+  /* border-radius: 20px; */
 }
 
 .shop-section .product-desription {
-  text-align: start;
-  padding: 10px 0;
-  display: flex;
+  /* text-align: start; */
+  /* padding: 10px 0; */
+  /* display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px; */
 }
 
 .shop-section .product-desription h5 {
