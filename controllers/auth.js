@@ -1,5 +1,16 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const nodeMailer = require("nodemailer");
+const crypto = require("crypto");
+
+const transporter = nodeMailer.createTransport({
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
+  auth: {
+    user: "ff1f9352efe8f0",
+    pass: "ce52f8eeec6529",
+  },
+});
 
 exports.isAuthenticated = (req, res, next) => {
   if (!req.session.isLoggedIn) {
@@ -103,4 +114,108 @@ exports.getLogOut = (req, res) => {
   req.session.destroy(() => {
     res.redirect("/");
   });
+};
+
+exports.getResetPasswordPage = (req, res) => {
+  res.render("auth/reset-password", {
+    pageTitle: "Reset password",
+    path: "/reset-password",
+    errorMessage: req.flash("error")[0],
+  });
+};
+
+exports.postResetPasswordPage = (req, res) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      return res.redirect("/reset-password");
+    }
+
+    const resetToken = buffer.toString("hex");
+
+    User.findOne({ email: req.body.email })
+      .then((user) => {
+        if (!user) {
+          throw new Error("Email not found");
+        }
+
+        user.resetToken = resetToken;
+        user.resetTokenExpiration = Date.now() + 3_600_000;
+
+        return user.save();
+      })
+      .then(() => {
+        res.redirect("/");
+        return transporter.sendMail({
+          from: "templiorz@gmail.com",
+          to: req.body.email,
+          subject: "Password reset",
+          html: `<p>You've requested a password reset</p>
+          <p>click this <a href="http://localhost:3000/update-password/${resetToken}">link</a> to set a new password</p>`,
+        });
+      })
+      .catch((err) => {
+        req.flash("error", err.message);
+        req.session.save(() => {
+          res.redirect("/reset-password");
+        });
+      });
+  });
+};
+
+exports.getUpdatePasswordPage = (req, res) => {
+  User.findOne({
+    resetToken: req.params.resetToken,
+    resetTokenExpiration: { $gt: Date.now() },
+  })
+    .then((user) => {
+      if (!user) {
+        throw new Error("Invalid or expired link");
+      }
+
+      res.render("auth/update-password", {
+        pageTitle: "Upadte password",
+        path: "/update-password",
+        resetToken: req.params.resetToken,
+        errorMessage: req.flash("error")[0],
+      });
+    })
+    .catch((err) => {
+      req.flash("error", err.message);
+      req.session.save(() => {
+        res.redirect("/reset-password");
+      });
+    });
+};
+
+exports.postUpdatePasswordPage = (req, res) => {
+  let user;
+  User.findOne({
+    resetToken: req.body.resetToken,
+    resetTokenExpiration: { $gt: Date.now() },
+  })
+    .then((u) => {
+      if (!u) {
+        throw new Error("Invalid or expired link");
+      }
+
+      user = u;
+
+      return bcrypt.hash(req.body.password, 12);
+    })
+    .then((hashedPassword) => {
+      user.password = hashedPassword;
+      user.resetToken = undefined;
+      user.resetTokenExpiration = undefined;
+      return user.save();
+    })
+    .then(() => {
+      res.redirect("/sign-in");
+    })
+    .catch((err) => {
+      req.flash("error", err.message);
+      req.session.save(() => {
+        res.redirect("/reset-password");
+      });
+    });
 };
