@@ -6,7 +6,7 @@
     <section class="shop-section">
         <div class="products-container">
             <% for (let product of products) { %>
-            <div class="product">
+            <a class="product" href="/shop/<%= product._id %>">
                 <img src="<%= product.imgUrl %>" alt="">
                 <div class="product-desription">
                     <div>
@@ -17,7 +17,7 @@
                         <button type="submit">Add To Cart</button>
                     </form>
                 </div>
-            </div>
+            </a>
             <% } %>
         </div>
     </section>

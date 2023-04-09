@@ -16,3 +16,5 @@ exports.getShopPage = (req, res) => {
     });
   });
 };
+
+exports.getProductPage = (req, res) => {};
