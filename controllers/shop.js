@@ -17,4 +17,13 @@ exports.getShopPage = (req, res) => {
   });
 };
 
+exports.postAddToCart = (req, res) => {
+  const productId = req.params.productId;
+  Product.findOne({ _id: productId })
+    .then((product) => {
+      console.log(product);
+    })
+    .catch();
+};
+
 exports.getProductPage = (req, res) => {};

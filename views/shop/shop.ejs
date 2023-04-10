@@ -27,12 +27,13 @@
                 <div class="product-description">
                     <h3><%= product.title %></h3>
                     <p>desction Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius, maxime.</p>
-                    <h3>$<%= product.price %></h3>
+                    <h4>$<%= product.price %></h4>
                 </div>
                 <div class="product-actions">
-                    <a href="">Details</a>
                     <form action="/add-to-cart/<%= product._id %>" method="post">
+                        <a href="/product-details">Details</a>
                         <button type="submit">Add To Cart</button>
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </div>
             </div>
