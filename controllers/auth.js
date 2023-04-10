@@ -172,7 +172,6 @@ exports.getUpdatePasswordPage = (req, res) => {
       if (!user) {
         throw new Error("Invalid or expired link");
       }
-
       res.render("auth/update-password", {
         pageTitle: "Upadte password",
         path: "/update-password",

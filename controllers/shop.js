@@ -21,9 +21,14 @@ exports.postAddToCart = (req, res) => {
   const productId = req.params.productId;
   Product.findOne({ _id: productId })
     .then((product) => {
-      console.log(product);
+      return req.session.user.addToCart(product);
     })
-    .catch();
+    .then(() => {
+      res.redirect("/shop");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 exports.getProductPage = (req, res) => {};

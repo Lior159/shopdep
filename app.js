@@ -40,9 +40,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store,
-    // cookie: {
-    //   maxAge: 1000*60*60;
-    // }
+    cookie: {
+      maxAge: 1000 * 60 * 10,
+    },
   })
 );
 
