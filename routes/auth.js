@@ -1,5 +1,6 @@
 const express = require("express");
 const authController = require("../controllers/auth");
+const { body } = require("express-validator");
 
 const router = express.Router();
 
@@ -9,7 +10,28 @@ router.post("/sign-in", authController.postSignInPage);
 
 router.get("/sign-up", authController.getSignUpPage);
 
-router.post("/sign-up", authController.postSignUpPage);
+router.post(
+  "/sign-up",
+  [
+    body("email", "Invalid email").isEmail(),
+    body(
+      "password",
+      "Password must include at least 8 characters, english letters, numbers and speciel characters."
+    )
+      .isAscii()
+      .isLength({ min: 8 }),
+    body("confirmedPassword").custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords must be matched");
+      }
+      return true;
+    }),
+    body(["fname, lname"])
+      .isLength({ min: 1 })
+      .withMessage("Name can't be empty"),
+  ],
+  authController.postSignUpPage
+);
 
 router.get("/logout", authController.isAuthenticated, authController.getLogOut);
 

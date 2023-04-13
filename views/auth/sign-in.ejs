@@ -4,8 +4,8 @@
 <body>
     <%- include('../includes/navbar.ejs')  %>
     <section class="sign-section">
-        <form action="/sign-in" method="post">
-            <input type="text" name="email" placeholder="Email adress">
+        <form action="/sign-in" method="post" novalidate>
+            <input type="email" name="email" placeholder="Email adress">
             <input type="password" name="password" placeholder="Password">
             <a href="/reset-password">Forgot your password?</a>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

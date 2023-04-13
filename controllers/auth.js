@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const nodeMailer = require("nodemailer");
 const crypto = require("crypto");
+const { validationResult } = require("express-validator");
 
 const transporter = nodeMailer.createTransport({
   host: "sandbox.smtp.mailtrap.io",
@@ -12,22 +13,23 @@ const transporter = nodeMailer.createTransport({
   },
 });
 
+const flashAndRender = (req, res, msg, path) => {
+  req.flash("error", msg);
+  return req.session.save(() => {
+    res.redirect(path);
+  });
+};
+
 exports.isAuthenticated = (req, res, next) => {
   if (!req.session.isLoggedIn) {
-    req.flash("error", "you must sign in");
-    return req.session.save(() => {
-      res.redirect("/sign-in");
-    });
+    return flashAndRender(req, res, "You must sign in.", "/sign-in");
   }
   next();
 };
 
 exports.isAdmin = (req, res, next) => {
-  if (!req.session.user.isAdmin) {
-    req.flash("error", "you must be admin");
-    return req.session.save(() => {
-      res.redirect("/sign-in");
-    });
+  if (!req.session.user?.isAdmin) {
+    return flashAndRender(req, res, "You must be admin.", "/sign-in");
   }
   next();
 };
@@ -64,10 +66,7 @@ exports.postSignInPage = (req, res) => {
       });
     })
     .catch((err) => {
-      req.flash("error", err.message);
-      req.session.save(() => {
-        res.redirect("/sign-in");
-      });
+      flashAndRender(req, res, err.message, "/sign-in");
     });
 };
 
@@ -80,6 +79,11 @@ exports.getSignUpPage = (req, res) => {
 };
 
 exports.postSignUpPage = (req, res) => {
+  const errors = validationResult(req).array();
+  if (errors.length > 0) {
+    return flashAndRender(req, res, errors[0].msg, "/sign-up");
+  }
+
   const { fname: firstName, lname: lastName, email, password } = req.body;
   User.findOne({ email })
     .then((user) => {
@@ -102,11 +106,7 @@ exports.postSignUpPage = (req, res) => {
       res.redirect("/sign-in");
     })
     .catch((err) => {
-      console.log(err);
-      req.flash("error", err.message);
-      req.session.save(() => {
-        res.redirect("/sign-up");
-      });
+      flashAndRender(req, res, err.message, "/sign-up");
     });
 };
 
@@ -140,7 +140,7 @@ exports.postResetPasswordPage = (req, res) => {
         }
 
         user.resetToken = resetToken;
-        user.resetTokenExpiration = Date.now() + 3_600_000;
+        user.resetTokenExpiration = Date.now() + 600_000;
 
         return user.save();
       })
@@ -155,10 +155,7 @@ exports.postResetPasswordPage = (req, res) => {
         });
       })
       .catch((err) => {
-        req.flash("error", err.message);
-        req.session.save(() => {
-          res.redirect("/reset-password");
-        });
+        flashAndRender(req, res, err.message, "/reset-password");
       });
   });
 };
@@ -180,10 +177,7 @@ exports.getUpdatePasswordPage = (req, res) => {
       });
     })
     .catch((err) => {
-      req.flash("error", err.message);
-      req.session.save(() => {
-        res.redirect("/reset-password");
-      });
+      flashAndRender(req, res, err.message, "/reset-password");
     });
 };
 
@@ -212,9 +206,6 @@ exports.postUpdatePasswordPage = (req, res) => {
       res.redirect("/sign-in");
     })
     .catch((err) => {
-      req.flash("error", err.message);
-      req.session.save(() => {
-        res.redirect("/reset-password");
-      });
+      flashAndRender(req, res, err.message, "/reset-password");
     });
 };

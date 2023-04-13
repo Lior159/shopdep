@@ -4,11 +4,12 @@
 <body>
     <%- include('../includes/navbar.ejs') %>
     <section class="sign-section">
-        <form action="/sign-up" method="post">
-            <input type="text" autocomplete="off" name="fname" placeholder="First name">
-            <input type="text" autocomplete="off" name="lname" placeholder="Last name">
-            <input type="text" autocomplete="off" name="email" placeholder="Email adress">
-            <input type="text" autocomplete="off" name="password" placeholder="Password">
+        <form action="/sign-up" method="post" autocomplete="off" novalidate>
+            <input type="text" name="fname" placeholder="First name">
+            <input type="text" name="lname" placeholder="Last name">
+            <input type="email" name="email" placeholder="Email adress">
+            <input type="text" name="password" placeholder="Password">
+            <input type="text" name="confirmedPassword" placeholder="Confirme password">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn">Sign up</button>
             <% if (errorMessage) { %>
