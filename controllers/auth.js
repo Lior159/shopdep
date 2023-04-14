@@ -3,6 +3,7 @@ const User = require("../models/user");
 const nodeMailer = require("nodemailer");
 const crypto = require("crypto");
 const { validationResult } = require("express-validator");
+const { flashAndRender } = require("../utils/util-funcs");
 
 const transporter = nodeMailer.createTransport({
   host: "sandbox.smtp.mailtrap.io",
@@ -12,13 +13,6 @@ const transporter = nodeMailer.createTransport({
     pass: "ce52f8eeec6529",
   },
 });
-
-const flashAndRender = (req, res, msg, path) => {
-  req.flash("error", msg);
-  return req.session.save(() => {
-    res.redirect(path);
-  });
-};
 
 exports.isAuthenticated = (req, res, next) => {
   if (!req.session.isLoggedIn) {
@@ -38,7 +32,6 @@ exports.getSignInPage = (req, res) => {
   res.render("auth/sign-in", {
     path: "/sign-in",
     pageTitle: "Sign in",
-    errorMessage: req.flash("error")[0],
   });
 };
 
@@ -49,14 +42,14 @@ exports.postSignInPage = (req, res) => {
   User.findOne({ email })
     .then((u) => {
       if (!u) {
-        throw new Error("email not exist");
+        throw new Error("Email not exist");
       }
       user = u;
       return bcrypt.compare(password, user.password);
     })
     .then((result) => {
       if (!result) {
-        throw new Error("wrong password");
+        throw new Error("Wrong password");
       }
 
       req.session.user = user;
@@ -74,7 +67,6 @@ exports.getSignUpPage = (req, res) => {
   res.render("auth/sign-up", {
     path: "/sign-up",
     pageTitle: "Sign up",
-    errorMessage: req.flash("error")[0],
   });
 };
 
@@ -120,7 +112,6 @@ exports.getResetPasswordPage = (req, res) => {
   res.render("auth/reset-password", {
     pageTitle: "Reset password",
     path: "/reset-password",
-    errorMessage: req.flash("error")[0],
   });
 };
 
@@ -173,7 +164,6 @@ exports.getUpdatePasswordPage = (req, res) => {
         pageTitle: "Upadte password",
         path: "/update-password",
         resetToken: req.params.resetToken,
-        errorMessage: req.flash("error")[0],
       });
     })
     .catch((err) => {

@@ -8,13 +8,17 @@
         <%- include('../includes/sidebar.ejs') %>
         <div class="main-container">
             <div class="form-container">
-                <form action="/account/add-product" method="post">
+                <form action="/account/add-product" method="post" enctype="multipart/form-data">
                     <input type="text" name="title" placeholder="Title">
-                    <input type="text" name="price" placeholder="Price">
-                    <input type="text" name="imgUrl" placeholder="Image URL">
+                    <input type="number" name="price" placeholder="Price">
+                    <input type="file" name="image" placeholder="Image URL">
                     <textarea name="description" placeholder="Description" cols="30" rows="10"></textarea>
                     <button class="btn">Create Product</button>
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <% if (errorMessage) { %>
+                    <p class="error-msg"><%= errorMessage %></p>
+                    <br>
+                    <% } %>
                 </form>
             </div>
         </div>

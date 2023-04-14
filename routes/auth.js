@@ -13,6 +13,12 @@ router.get("/sign-up", authController.getSignUpPage);
 router.post(
   "/sign-up",
   [
+    body(
+      ["email", "password", "confirmedPassword", "fname", "lname"],
+      "Fields can't be empty"
+    )
+      .not()
+      .isEmpty(),
     body("email", "Invalid email").isEmail(),
     body(
       "password",
@@ -26,9 +32,6 @@ router.post(
       }
       return true;
     }),
-    body(["fname, lname"])
-      .isLength({ min: 1 })
-      .withMessage("Name can't be empty"),
   ],
   authController.postSignUpPage
 );

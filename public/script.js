@@ -4,7 +4,7 @@ const navbar_account_arrows = document.querySelectorAll(
   ".navbar .account-arrow"
 );
 
-navbar_account_btn.addEventListener("click", (e) => {
+navbar_account_btn?.addEventListener("click", (e) => {
   e.preventDefault();
   navbar_account_menu.classList.toggle("hidden");
   navbar_account_arrows.forEach((a) => {

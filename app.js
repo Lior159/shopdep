@@ -6,6 +6,21 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 const csurf = require("csurf");
+const multer = require("multer");
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, "images");
+    },
+    filename: (req, file, cb) => {
+      cb(
+        null,
+        new Date().toISOString().replaceAll(":", "-") + "-" + file.originalname
+      );
+    },
+  }),
+});
 
 const shopRouter = require("./routes/shop");
 const authRouter = require("./routes/auth");
@@ -23,6 +38,8 @@ const store = new MongoDBStore({
   collection: "sessions",
 });
 
+//setting up file-parser
+app.use(upload.single("image"));
 //setting up body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -30,8 +47,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-//setting up public folder
+//setting up public folder for css and js
 app.use(express.static(path.join(__dirname, "public")));
+
+//setting up public folder for product images
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 //setting up session
 app.use(
@@ -40,9 +60,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store,
-    cookie: {
-      maxAge: 1000 * 60 * 10,
-    },
+    // cookie: {
+    //   maxAge: 1000 * 60 * 10,
+    // },
   })
 );
 
@@ -54,6 +74,7 @@ app.use(flash());
 
 //setting up local variables
 app.use((req, res, next) => {
+  res.locals.errorMessage = req.flash("error")[0];
   res.locals.csrfToken = req.csrfToken();
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.isAdmin = req.session.user?.isAdmin;
