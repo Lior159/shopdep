@@ -184,12 +184,8 @@
   display: flex;
 }
 
-.shop-section .left-menu {
-  width: 20rem;
-}
-
 .shop-section .products-container {
-  width: calc(100% - 20rem);
+  width: calc(100% - 15rem);
   display: grid;
   grid-template-columns: repeat(3, 33.333%);
 }
@@ -198,6 +194,10 @@
   margin-top: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   height: 600px;
+}
+
+.shop-section .product.single-page {
+  grid-column-start: 2;
 }
 
 .shop-section .product .product-image {
@@ -259,6 +259,48 @@
 .shop-section .product .product-actions form button:hover {
   background-color: black;
   color: white;
+}
+
+.pagination-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+
+.pagination-container a {
+  width: 50px;
+  height: 50px;
+  margin: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 100px;
+  background-color: black;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.pagination-container a.active,
+.pagination-container a:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.left-menu {
+  width: 15rem;
+  padding: 10px;
+  background-color: red;
+}
+
+.left-menu input {
+  display: inline-block;
+  width: 80px;
+  text-align: center;
 }
 
 /* .shop-section .product .product-actions form button {

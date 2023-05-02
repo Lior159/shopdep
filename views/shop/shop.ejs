@@ -5,22 +5,20 @@
     <%- include('../includes/navbar.ejs') %>
     <section class="shop-section">
         <div class="left-menu">
-            <ul>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-                <li><a href="">somthing</a></li>
-            </ul>
+            <div>
+                <h4>Price</h4>
+                <div>
+                    <input type="number" name="minPrice" placeholder="min" min="0"><span>To</span>
+                    <input type="number" name="maxPrice" placeholder="max" min="0">
+                </div>
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
         <div class="products-container">
             <% for (let product of products) { %>
-            <div class="product" href="/shop/<%= product._id %>">
+            <div class="product <%= products.length%3 == 1 ? 'single-page': '' %>" href="/shop/<%= product._id %>">
                 <div class="product-image">
                     <img src="<%= product.imgUrl %>" alt="">
                 </div>
@@ -30,14 +28,22 @@
                     <h4>$<%= product.price %></h4>
                 </div>
                 <div class="product-actions">
-                    <form action="/add-to-cart/<%= product._id %>" method="post">
+                    <form action="/add-to-cart" method="post">
                         <a href="/product-details">Details</a>
                         <button type="submit">Add To Cart</button>
+                        <input type="hidden" name="productId" value="<%= product._id %>">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </div>
             </div>
             <% } %>
+            <div class="pagination-container">
+                <a href="?page=<%= previousPage %>"><i class="fa-solid fa-arrow-left"></i></a>
+                <% for (let i = firstIndex; i < firstIndex + 4 && i <= totalPages; i++ ) { %>
+                <a href="?page=<%= i %>" class='<%= i == currentPage ? 'active': '' %>'><%= i %></a>
+                <% } %>
+                <a href="?page=<%= nextPage %>"><i class=" fa-solid fa-arrow-right"></i></a>
+            </div>
         </div>
     </section>
     <script src="/script.js"></script>

@@ -4,4 +4,8 @@
 
 - handle empty image input field
 
--stream data (fs), pipes, and al this shit
+- stream data (fs), pipes, and al this shit
+
+- bug fixes and catch errors
+
+- fix pagination functionality

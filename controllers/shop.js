@@ -1,4 +1,5 @@
 const Product = require("../models/product");
+const User = require("../models/user");
 
 exports.getIndexPage = (req, res) => {
   res.render("shop/index", {
@@ -8,13 +9,33 @@ exports.getIndexPage = (req, res) => {
 };
 
 exports.getShopPage = (req, res) => {
-  Product.find().then((products) => {
-    res.render("shop/shop", {
-      path: "/shop",
-      pageTitle: "Shop",
-      products,
+  const PRODUCTS_PER_PAGE = 3;
+  let totalPages;
+  let currentPage = +req.query.page || 1;
+  Product.countDocuments()
+    .then((count) => {
+      totalPages = Math.ceil(count / PRODUCTS_PER_PAGE);
+      return Product.find()
+        .skip(PRODUCTS_PER_PAGE * (currentPage - 1))
+        .limit(PRODUCTS_PER_PAGE);
+    })
+    .then((products) => {
+      res.render("shop/shop", {
+        path: "/shop",
+        pageTitle: "Shop",
+        products,
+        currentPage,
+        previousPage: currentPage - 1 > 0 ? currentPage - 1 : currentPage,
+        nextPage: currentPage + 1 <= totalPages ? currentPage + 1 : currentPage,
+        firstIndex: currentPage < 4 ? 1 : currentPage - 2,
+        totalPages,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  });
+
+  Product.find().then((products) => {});
 };
 
 exports.postAddToCart = (req, res) => {
@@ -29,6 +50,14 @@ exports.postAddToCart = (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+exports.getCartPage = (req, res) => {
+  res.render("/shop/cart", {
+    path: "/cart",
+    pageTitle: "Cart",
+    cart: req.session.user.cart.items,
+  });
 };
 
 exports.getProductPage = (req, res) => {};

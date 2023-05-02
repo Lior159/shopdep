@@ -26,7 +26,7 @@ exports.postAddProductPage = (req, res) => {
   const product = new Product({
     title: req.body.title,
     price: req.body.price,
-    imgUrl: req.file.image.path,
+    imgUrl: req.file.path,
     description: req.body.description,
   });
   product.save().then((result) => {
