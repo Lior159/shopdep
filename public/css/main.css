@@ -5,7 +5,8 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  list-style-type: none;
+  list-style: none;
+  text-decoration: none;
 }
 
 /*---------- navbar ----------*/
@@ -294,7 +295,6 @@
 .left-menu {
   width: 15rem;
   padding: 10px;
-  background-color: red;
 }
 
 .left-menu input {
