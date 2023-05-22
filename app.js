@@ -29,8 +29,9 @@ const User = require("./models/user");
 
 const app = express();
 
-const MONGODB_URI =
-  "mongodb+srv://lior:lior159@cluster1.wgsdzck.mongodb.net/shop?retryWrites=true&w=majority";
+const MONGODB_URI = process.env.CONNECTION_STRING;
+// const MONGODB_URI =
+//   "mongodb+srv://lior:lior159@cluster1.wgsdzck.mongodb.net/shop?retryWrites=true&w=majority";
 
 //setting up session storage
 const store = new MongoDBStore({
@@ -98,7 +99,7 @@ app.use((req, res) => {
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    app.listen(9090);
+    app.listen(process.env.PORT || 9090);
     console.log("connected");
   })
   .catch((err) => console.log(err));
