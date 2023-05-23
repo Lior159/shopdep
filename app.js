@@ -7,6 +7,13 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
 const csurf = require("csurf");
 const multer = require("multer");
+const helmet = require("helmet");
+const compression = require("compression");
+const morgan = require("morgan");
+
+require("dotenv").config();
+
+console.log(process.env.NODE_ENV);
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -28,6 +35,21 @@ const accountRouter = require("./routes/account.js");
 const User = require("./models/user");
 
 const app = express();
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "https:", "data:"],
+      },
+    },
+  })
+);
+
+// app.use(compression());
+
+// app.use(morgan("combined"));
 
 const MONGODB_URI = process.env.CONNECTION_STRING;
 // const MONGODB_URI =
